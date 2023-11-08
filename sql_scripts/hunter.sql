@@ -7,7 +7,9 @@ CREATE TABLE "hunter" (
   "language" varchar,
   "company_name" varchar,
   "country" varchar,
-  "employees_count" integer
+  "employees_count" integer,
+  "created_at" timestamp,
+  "updated_at" timestamp
 );
 
 CREATE TABLE "hunter_contact" (
@@ -23,17 +25,23 @@ CREATE TABLE "hunter_contact" (
   "state" varchar,
   "city" varchar,
   "street" varchar,
-  "postcode" varchar
+  "postcode" varchar,
+  "created_at" timestamp,
+  "updated_at" timestamp
 );
 
 CREATE TABLE "hunter_categories" (
   "id" integer PRIMARY KEY,
-  "category" varchar
+  "category" varchar,
+  "created_at" timestamp,
+  "updated_at" timestamp
 );
 
 CREATE TABLE "hunter_description" (
   "id" integer PRIMARY KEY,
-  "description" varchar
+  "description" varchar,
+  "created_at" timestamp,
+  "updated_at" timestamp
 );
 
 ALTER TABLE "hunter_contact" ADD FOREIGN KEY ("id") REFERENCES "hunter" ("id");

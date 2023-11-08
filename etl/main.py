@@ -1,7 +1,7 @@
 import sys
 import logging
 
-from ingester import KaggleIngester
+from ingester import CrunchbaseIngester, HunterIngester, KaggleIngester
 
 if __name__ == "__main__":
 	allowed_args = ["crunchbase", "kaggle", "hunter"]

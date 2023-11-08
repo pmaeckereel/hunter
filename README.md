@@ -7,6 +7,13 @@ The SQL design of the database was made via [https://dbdiagram.io/d](https://dbd
 
 ![tables schema](./design/database_design.png)
 
+## Requirements
+
+Some python libraries are required. You can install it via the command 
+```bash
+pip install -r requirements.txt
+```
+
 ## Setup the postgresql local server
 
 To setup the local postgres, I followed this tutorial [prisma.io/setting-up-postgresql](https://www.prisma.io/dataguide/postgresql/setting-up-a-local-postgresql-database#setting-up-postgresql-on-linux).
@@ -38,3 +45,20 @@ python etl/main.py datasets/ kaggle
 ```
 
 with the first arg being the path to the directory containing CSV files, and the second one an optional argument if you want to process only one dataset/source.
+
+## Create global joined table
+
+A new table can be created with SQL command, from other tables.\\
+For instance, in a `psql` shell:
+```sql
+CREATE TABLE corporations AS (
+	SELECT e.uuid,website,company_name,status,founded_on,employee_count,language,sector,city,state FROM (
+		SELECT * FROM crunchbase JOIN hunter ON crunchbase.name = hunter.company_name) AS e 
+	JOIN kaggle on e.name = kaggle.company
+);
+```
+
+A better name and alias cleaning would allow for a better macthing between tables. A global id mapping would be even better.
+
+## Data dump
+A dump of the database as been extracted at the end, and joined alongside the repo.
